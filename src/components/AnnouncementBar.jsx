@@ -2,7 +2,7 @@ const AnnouncementBar = () => {
   return (
     <>
       <marquee
-        className="text-5xl font-bold bg-amber-200 flex justify-center items-center fixed top-0 right-0 left-0 z-50"
+        className="text-3xl font-bold bg-amber-200 flex justify-center items-center fixed top-0 right-0 left-0 z-50"
         scrollamount="10"
         height="70px"
       >
