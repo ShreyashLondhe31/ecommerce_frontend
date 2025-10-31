@@ -3,14 +3,14 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import AnnouncementBar from "./components/AnnouncementBar";
 import NotFoundPage from "./pages/NotFoundPage";
 import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   return (
-    <div>
+    <div className="App h-screen w-full overflow-x-hidden">
       {/* 1. Add the AnnouncementBar so it's visible on every page */}
       <AnnouncementBar />
       {/* 2. Add the Navbar so it's visible on every page */}

@@ -6,7 +6,7 @@ export const allProducts = [
     rating: 4.8,
     category: "Power Tools",
     image:
-      "https://images.pexels.com/photos/1249603/pexels-photo-1249603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://imgs.search.brave.com/qSNT37enWzhhILNtS6-WHJHqt2D-h2kI2XtJxqsiybQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzcxS1QwUThUR1VM/LmpwZw",
   },
   {
     id: "bs003",
@@ -15,7 +15,7 @@ export const allProducts = [
     rating: 4.9,
     category: "Hammers",
     image:
-      "https://images.pexels.com/photos/8957088/pexels-photo-8957088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://imgs.search.brave.com/Kq50-hKWoRCZhlwdcQk13JOsIAg-Yp_TPvhWQYq_njY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzcxSEZOdDBqWldM/LmpwZw",
   },
   {
     id: "pt002",
@@ -24,7 +24,7 @@ export const allProducts = [
     rating: 4.6,
     category: "Power Tools",
     image:
-      "https://images.pexels.com/photos/4792493/pexels-photo-4792493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://imgs.search.brave.com/R-eJNir7MsvWgFKAHgmvmXBqWthc2LKI5-Gtzq_MdE8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ydWtt/aW5pbTEuZmxpeGNh/cnQuY29tL2ltYWdl/LzYxMi82MTIva2Zs/ZnR6azAvYW5nbGUt/Z3JpbmRlci9oL2cv/aC9hbmdsZS1ncmlu/ZGVyLXJ4LTg4MDEt/OTAwdy0xMDBtbS1o/ZWF2eS1kdXR5LTEx/MDAwLXJwbS1ydW5l/eC1vcmlnaW5hbC1p/bWFmd3l6Y3lhZ2hy/bXd5LmpwZWc_cT03/MA",
   },
   {
     id: "bs004",
@@ -33,7 +33,7 @@ export const allProducts = [
     rating: 4.6,
     category: "Pliers",
     image:
-      "https://images.pexels.com/photos/61127/pexels-photo-61127.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://imgs.search.brave.com/TP1wUjqLyEtqwnlea7ZeeH_NAR_eAbQOBItVuntwWlk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFZVkVzalZwbUwu/anBn",
   },
   {
     id: "hm002",
@@ -42,7 +42,7 @@ export const allProducts = [
     rating: 4.7,
     category: "Hammers",
     image:
-      "https://images.pexels.com/photos/8957085/pexels-photo-8957085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://imgs.search.brave.com/uWvY65z6z2PBbmSkLlRrb325QGw6qp6PXPMX4Aj-Cho/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tb3Rv/cmhlYWR0b29scy5j/b20vY2RuL3Nob3Av/cHJvZHVjdHMvVEg3/OTUwM0FfLTIwMDEw/OV83XzEwMjR4MTAy/NC5qcGc_dj0xNjE1/OTIxNzQ2",
   },
   {
     id: "bs007",
@@ -51,6 +51,6 @@ export const allProducts = [
     rating: 4.8,
     category: "Screwdrivers",
     image:
-      "https://images.pexels.com/photos/1239859/pexels-photo-1239859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://imgs.search.brave.com/xRfxAvTq1QOQj85WJ-9ep_GKrvhRu3gHABQr8uQYVJc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NDFhMkdmQVVBaUwu/anBn",
   },
 ];

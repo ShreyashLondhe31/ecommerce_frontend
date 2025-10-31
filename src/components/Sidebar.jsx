@@ -1,14 +1,32 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
-import { useContext, createContext, useState } from "react";
+// 1. Import useEffect
+import { useContext, createContext, useState, useEffect } from "react";
 
 const SidebarContext = createContext();
 
-export default function Sidebar({ children }) {
+export default function Sidebar({ children, isDrawerOpen, setIsDrawerOpen }) {
   const [expanded, setExpanded] = useState(false);
 
+  // 2. Add this useEffect hook
+  useEffect(() => {
+    // When the drawer is opened from the mobile button
+    if (isDrawerOpen) {
+      // Automatically expand the panel
+      setExpanded(true);
+    }
+  }, [isDrawerOpen]); // This effect runs whenever isDrawerOpen changes
+
   return (
-    <aside className="h-screen w-[300px] fixed z-1 left-0 top-70">
-      <nav className="h-[40%] inline-flex flex-col bg-white border-r shadow-sm">
+    <aside
+      className={`fixed z-20 left-0 top-1/2 -translate-y-1/2 
+                  transition-transform duration-300
+                  ${
+                    isDrawerOpen
+                      ? "translate-x-0"
+                      : "-translate-x-full md:translate-x-0"
+                  }`}
+    >
+      <nav className="h-auto inline-flex flex-col bg-white border-r border-t border-b rounded-r-lg shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
             src="https://img.logoipsum.com/243.svg"
@@ -18,7 +36,17 @@ export default function Sidebar({ children }) {
             alt=""
           />
           <button
-            onClick={() => setExpanded((curr) => !curr)}
+            onClick={() => {
+              const newExpanded = !expanded;
+              setExpanded(newExpanded);
+
+              // 3. This existing logic is still correct:
+              // If the user manually closes the panel,
+              // also close the mobile drawer.
+              if (!newExpanded) {
+                setIsDrawerOpen(false);
+              }
+            }}
             className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
@@ -33,6 +61,7 @@ export default function Sidebar({ children }) {
   );
 }
 
+// --- No changes are needed for SidebarItem ---
 export function SidebarItem({ icon, text, active, alert }) {
   const { expanded } = useContext(SidebarContext);
 
