@@ -21,8 +21,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="h-12 flex items-center">
             <img 
-              src="/assets/logo/Logo.png" 
-              alt="Company Logo"
+              src={`${import.meta.env.BASE_URL}assets/logo/Logo.png`}
               className="h-full w-auto object-contain" 
             />
           </Link>

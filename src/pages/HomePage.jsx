@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { useCartStore } from "../store/cartStore";
 import axios from "axios";
 
-const response = await axios.get("").then((res) => console.log(res.data));
+
 // Data constants
 const productCategories = [
   {
@@ -141,21 +141,21 @@ const bestSellers = [
 const carouselSlides = [
   {
     id: "slide1",
-    image: "/assets/hero_carousel/HC_1.png",
+    image: `${import.meta.env.BASE_URL}assets/hero_carousel/HC_1.png`,
     alt: "High-quality construction tools on a blueprint",
     title: "Professional Grade Tools",
     subtitle: "Built to last for any project, big or small.",
   },
   {
     id: "slide2",
-    image: "/assets/hero_carousel/HC_2.png",
+    image: `${import.meta.env.BASE_URL}assets/hero_carousel/HC_2.png`,
     alt: "A collection of power tools hanging on a wall",
     title: "Unleash Your Power",
     subtitle: "Explore our wide range of cordless power tools.",
   },
   {
     id: "slide3",
-    image: "/assets/hero_carousel/HC_3.png",
+    image: `${import.meta.env.BASE_URL}assets/hero_carousel/HC_3.png`,
     alt: "A circular saw cutting through a piece of wood",
     title: "Precision in Every Cut",
     subtitle: "Get the perfect finish with our collection of saws.",
@@ -318,17 +318,17 @@ const HomePage = () => {
         >
           <div className="flex items-center h-full">
             <img
-              src="/assets/brand_images/Brand_Image1.jpg"
+              src={`${import.meta.env.BASE_URL}assets/brand_images/Brand_Image1.jpg`}
               alt="Brand 1"
               className="h-10 mx-4 md:h-16 md:mx-8"
             />
             <img
-              src="/assets/brand_images/Brand_Image2.jpg"
+              src={`${import.meta.env.BASE_URL}assets/brand_images/Brand_Image2.jpg`}
               alt="Brand 2"
               className="h-10 mx-4 md:h-16 md:mx-8"
             />
             <img
-              src="/assets/brand_images/Brand_Image3.jpg"
+              src={`${import.meta.env.BASE_URL}assets/brand_images/Brand_Image3.jpg`}
               alt="Brand 3"
               className="h-10 mx-4 md:h-16 md:mx-8"
             />
@@ -457,7 +457,7 @@ const HomePage = () => {
           <div className="flex flex-col items-center md:items-start">
             <Link to="/" className="h-24 flex items-center mb-4">
               <img 
-                src="/assets/logo/Logo.png" 
+                src={`${import.meta.env.BASE_URL}assets/logo/Logo.png`}
                 alt="Company Logo"
                 className="h-full w-auto object-contain" 
               />
