@@ -3,6 +3,59 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.carousel-container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.embla {
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.embla__container {
+  display: flex;
+  height: 300px;
+  max-height: 30vh;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  position: relative;
+}
+
+/* Full-width hero section */
+.hero-section {
+  width: 100%;
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+/* Font consistency */
+.font-inter {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

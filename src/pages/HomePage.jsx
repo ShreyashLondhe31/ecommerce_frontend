@@ -252,11 +252,11 @@ const HomePage = () => {
   return (
     <div className="main min-h-screen w-full">
       {/* Hero Section - Custom Carousel */}
-      <div className="hero-section w-full px-4 md:px-8 py-10">
-        <div className="relative w-full">
+      <div className="hero-section w-full py-6 bg-white">
+        <div className="relative w-[70%] mx-auto">
           {/* Carousel Container with Swipe Handlers */}
           <div
-            className="overflow-hidden rounded-lg"
+            className="overflow-hidden shadow-md rounded-lg"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -271,11 +271,11 @@ const HomePage = () => {
             >
               {slidesToRender.map((slide, index) => (
                 <div key={slide.id + "-" + index} className="min-w-full">
-                  <div className="relative aspect-video md:aspect-[16/7] w-full">
+                  <div className="relative w-full h-full">
                     <img
                       src={slide.image}
                       alt={slide.alt}
-                      className="w-full h-full object-fit relative z-1"
+                      className="w-full h-full object-cover relative z-1"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white p-4 text-center">
                       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
@@ -338,10 +338,15 @@ const HomePage = () => {
 
       {/* Product Categories Section */}
       <div className="product-categories w-full flex flex-col justify-center items-center mt-10 py-10 px-4 md:px-8">
-        <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
-          Product Categories
-        </h1>
-        <div className="h-2 w-full border-t-2"></div>
+        <div className="flex flex-col items-center mb-10">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="h-[1px] w-16 bg-amber-500"></div>
+            <h1 className="text-3xl md:text-4xl font-semibold text-center">
+              Product Categories
+            </h1>
+            <div className="h-[1px] w-16 bg-amber-500"></div>
+          </div>
+        </div>
         <div className="category-container grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-5 w-full max-w-6xl">
           {displayedCategories.map((category, idx) => {
             const categorySlug = category.name.toLowerCase().replace(/ /g, "-");
@@ -349,16 +354,14 @@ const HomePage = () => {
               <Link
                 to={`/category/${categorySlug}`}
                 key={idx}
-                // --- 1. STYLING CHANGES ---
                 className="container-card w-full flex flex-col justify-center 
-                           items-center border-2 border-gray-200 rounded-2xl shadow-lg 
+                           items-center bg-white rounded-2xl shadow-sm 
                            p-3 md:p-4 h-56 md:h-64 
                            transform hover:scale-105 transition-transform duration-300"
               >
                 <img
-                  // --- 2. STYLING CHANGES ---
-                  className="object-contain w-full border-2 border-gray-200 rounded-lg p-2
-                             h-32 md:h-40"
+                  className="object-contain w-full rounded-lg p-2
+                             h-32 md:h-40 bg-gray-50"
                   src={category.image}
                   alt={category.name}
                 />
@@ -386,24 +389,27 @@ const HomePage = () => {
 
       {/* Best Seller section */}
       <div className="w-full bg-amber-200 flex flex-col justify-center items-center mt-7 py-10 px-4 md:px-8">
-        <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
-          BestSellers
-        </h1>
-        <div className="h-2 w-full border-t-2"></div>
+        <div className="flex flex-col items-center mb-10">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="h-[1px] w-16 bg-white"></div>
+            <h1 className="text-3xl md:text-4xl font-semibold text-center">
+              BestSellers
+            </h1>
+            <div className="h-[1px] w-16 bg-white"></div>
+          </div>
+        </div>
         <div className="productCard-holder grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-5 w-full max-w-6xl">
           {displayedBestsellers.map((product) => (
             <div
               key={product.id}
-              // --- 1. STYLING CHANGES ---
               className="container-card w-full flex flex-col justify-between 
-                         border-2 bg-white border-gray-200 rounded-2xl shadow-lg 
+                         bg-white rounded-2xl shadow-sm 
                          p-3 md:p-4 h-64 md:h-72"
             >
               <div>
                 <img
-                  // --- 2. STYLING CHANGES ---
-                  className="object-contain w-full border-2 border-gray-200 rounded-lg p-2
-                             h-28 md:h-32"
+                  className="object-contain w-full rounded-lg p-2
+                             h-28 md:h-32 bg-gray-50"
                   src={product.image}
                   alt={product.name}
                 />
@@ -417,7 +423,7 @@ const HomePage = () => {
                   // --- 4. STYLING CHANGES ---
                   className="text-base md:text-lg font-bold text-amber-600 mt-1"
                 >
-                  {product.price.toFixed(3)} KD
+                  {product.price.toFixed(3)} د.ك
                 </p>
               </div>
               <button
@@ -445,34 +451,64 @@ const HomePage = () => {
       </div>
 
       {/* Footer and Sidebar sections */}
-      <div className="w-full bg-amber-200 flex flex-col lg:flex-row justify-around items-center lg:items-start text-center lg:text-left gap-8 lg:gap-4 mt-7 py-10 px-4 md:px-8">
-        <div className="w-full sm:w-80 lg:w-[300px] bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-          <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>
-          <ul className="text-lg space-y-1">
-            <li>Email</li>
-            <li>Whatsapp</li>
-            <li>Facebook</li>
-            <li>X</li>
-          </ul>
-        </div>
-        <div className="w-full sm:w-80 lg:w-[300px] bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-          <h1 className="text-2xl font-semibold mb-4">Information</h1>
-          <ul className="text-lg space-y-1">
-            <li>About us</li>
-            <li>Discounts</li>
-            <li>Latest news</li>
-            <li>New Products</li>
-          </ul>
-        </div>
-        <div className="w-full sm:w-80 lg:w-[3D_modeling] bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-          <h1 className="text-2xl font-semibold mb-4">Policies</h1>
-          <ul className="text-lg space-y-1">
-            <li>Policy 1</li>
-            <li>Policy 2</li>
-            <li>Policy 3</li>
-            <li>Policy 4</li>
-          </ul>
-        </div>
+      <footer className="w-full bg-amber-200 mt-7 py-12 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Logo Section */}
+          <div className="flex flex-col items-center md:items-start">
+            <Link to="/" className="h-24 flex items-center mb-4">
+              <img 
+                src="/assets/logo/Logo.png" 
+                alt="Company Logo"
+                className="h-full w-auto object-contain" 
+              />
+            </Link>
+            <p className="text-amber-900 text-center md:text-left mt-2">
+              Your trusted partner for quality tools and hardware.
+            </p>
+          </div>
+
+          {/* Three columns shifted right */}
+          <div className="flex flex-col items-center md:items-start">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-[1px] w-12 bg-amber-500"></div>
+              <h1 className="text-2xl font-semibold">Contact Us</h1>
+              <div className="h-[1px] w-12 bg-amber-500"></div>
+            </div>
+            <ul className="text-lg space-y-3 text-center md:text-left">
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Email</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Whatsapp</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Facebook</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">X</li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col items-center md:items-start">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-[1px] w-12 bg-amber-500"></div>
+              <h1 className="text-2xl font-semibold">Information</h1>
+              <div className="h-[1px] w-12 bg-amber-500"></div>
+            </div>
+            <ul className="text-lg space-y-3 text-center md:text-left">
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">About us</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Discounts</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Latest news</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">New Products</li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col items-center md:items-start">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-[1px] w-12 bg-amber-500"></div>
+              <h1 className="text-2xl font-semibold">Policies</h1>
+              <div className="h-[1px] w-12 bg-amber-500"></div>
+            </div>
+            <ul className="text-lg space-y-3 text-center md:text-left">
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Policy 1</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Policy 2</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Policy 3</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Policy 4</li>
+            </ul>
+          </div>
       </div>
 
       <button
@@ -501,6 +537,7 @@ const HomePage = () => {
           <SidebarItem icon={<Mail size={20} />} text="Email" />
         </Sidebar>
       </aside>
+      </footer>
     </div>
   );
 };

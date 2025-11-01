@@ -12,6 +12,6 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["kindra-pseudoaesthetic-maryanna.ngrok-free.dev"],
+    allowedHosts: ["preactive-unamatively-zina.ngrok-free.dev"],
   },
 });

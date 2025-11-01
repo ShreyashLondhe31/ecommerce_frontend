@@ -1,100 +1,126 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useCartStore } from "../../store/cartStore";
 import { CiSearch } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
 import { MdMenu } from "react-icons/md";
-import { IoClose } from "react-icons/io5"; // 1. Import the close icon
+import { IoClose } from "react-icons/io5";
 import ResponsiveMenu from "./ResponsiveMenu";
-import { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  // 2. Add state for the search bar
   const [showSearch, setShowSearch] = useState(false);
-
   const { items } = useCartStore();
+  
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
-      <nav className="w-full">
-        <div className="flex items-center justify-between py-2 px-7 shadow-md">
-          {/* Logo Section */}
-          <div className="h-2 max-w-26 mt-3 flex items-center gap-2 font-bold py-8">
-            <img src="/assets/logo/Logo.png" alt="" />
-          </div>
+      <nav className="w-full bg-amber-200 sticky top-12 z-40 shadow-sm">
+        <div className="flex items-center justify-between py-4 px-4 md:px-7">
+          {/* Logo */}
+          <Link to="/" className="h-12 flex items-center">
+            <img 
+              src="/assets/logo/Logo.png" 
+              alt="Company Logo"
+              className="h-full w-auto object-contain" 
+            />
+          </Link>
 
-          {/* Menu Section */}
+          {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <ul className="flex items-center gap-6 font-medium text-lg">
-              <Link to="/">Home</Link>
-              <Link to="/category/power-tools">Product</Link>{" "}
-              {/* Example Link */}
-              <Link to="/contact">Contact us</Link>
+            <ul className="flex items-center gap-8 font-medium">
+              <li>
+                <Link to="/" 
+                  className="text-amber-900 hover:text-amber-700 transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/category/power-tools" 
+                  className="text-amber-900 hover:text-amber-700 transition-colors"
+                >
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" 
+                  className="text-amber-900 hover:text-amber-700 transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Icons Section */}
-          <div className="flex items-center gap-1">
+          {/* Actions */}
+          <div className="flex items-center gap-2">
             {showSearch ? (
-              // 3. Show the search bar when showSearch is true
-              <div className="flex items-center gap-2 animate-fadeIn">
+              <div className="flex items-center gap-2">
                 <input
                   type="text"
-                  placeholder="Search..."
-                  className="px-3 py-1.5 border rounded-full focus:outline-none focus:border-amber-500 transition-all duration-300 w-48"
+                  placeholder="Search products..."
+                  className="w-48 px-4 py-2 bg-amber-100/50 rounded-full 
+                           text-amber-900 placeholder:text-amber-700
+                           focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-amber-100 transition-all"
                   autoFocus
                 />
                 <button
                   onClick={() => setShowSearch(false)}
-                  className="text-2xl hover:bg-amber-200 p-2 rounded-full"
+                  className="p-2 hover:bg-amber-200 rounded-full transition-colors"
+                  aria-label="Close search"
                 >
-                  <IoClose size={24} />
+                  <IoClose size={24} className="text-amber-900" />
                 </button>
               </div>
             ) : (
-              // 4. Show the default icons when showSearch is false
               <>
                 <button
                   onClick={() => setShowSearch(true)}
-                  className="text-2xl hover:bg-amber-200 hover:text-gray-700 duration-200 p-2 mr-4 rounded-full"
+                  className="p-2 hover:bg-amber-200 rounded-full transition-colors"
+                  aria-label="Search"
                 >
-                  <CiSearch className="text-2xl" />
+                  <CiSearch size={24} className="text-amber-900" />
                 </button>
 
-                {/* 5. Cart button is now a Link to /cart with a badge */}
                 <Link
                   to="/cart"
-                  className="relative text-2xl hover:bg-amber-200 hover:text-gray-700 duration-200 p-2 mr-4 rounded-full"
+                  className="relative p-2 hover:bg-amber-200 rounded-full transition-colors"
+                  aria-label="Shopping cart"
                 >
-                  <PiShoppingCartThin className="text-2xl" />
+                  <PiShoppingCartThin size={24} className="text-amber-900" />
                   {totalItems > 0 && (
-                    <span
-                      className="absolute -top-1 -right-1 bg-red-500 text-white text-xs 
-                                     rounded-full h-5 w-5 flex items-center justify-center"
-                    >
+                    <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs
+                                   rounded-full h-5 w-5 flex items-center justify-center">
                       {totalItems}
                     </span>
                   )}
                 </Link>
 
-                <button className="hover:bg-amber-200 text-black font-semibold hover:text-white rounded-md border-2 px-6 py-2 duration-200 ">
+                <button className="ml-2 px-4 py-2 bg-amber-100 text-amber-900
+                                font-medium rounded-lg hover:bg-amber-900 hover:text-amber-100 
+                                transition-colors">
                   Login
                 </button>
               </>
             )}
-          </div>
 
-          {/* Mobile hamburger Menu Section */}
-          <div className="md:hidden" onClick={() => setOpen(!open)}>
-            <MdMenu className="text-4xl" />
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              <MdMenu size={28} />
+            </button>
           </div>
         </div>
       </nav>
-
-      {/* Mobile Sidebar section */}
+      
       <ResponsiveMenu open={open} setOpen={setOpen} />
     </>
   );
 };
+
 export default Navbar;

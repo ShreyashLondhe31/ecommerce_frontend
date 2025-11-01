@@ -98,7 +98,7 @@ const CartPage = () => {
                         {item.category}
                       </p>
                       <p className="text-base sm:text-lg font-bold text-amber-600 mt-1">
-                        {item.price.toFixed(3)} KD
+                        {item.price.toFixed(3)} د.ك
                       </p>
                     </div>
 
@@ -126,7 +126,7 @@ const CartPage = () => {
                       {/* 6. Width and text size are responsive */}
                       <div className="text-right w-auto sm:w-32">
                         <p className="font-bold text-base sm:text-lg text-gray-800">
-                          {(item.price * item.quantity).toFixed(3)} KD
+                          {(item.price * item.quantity).toFixed(3)} د.ك
                         </p>
                       </div>
                       <button
@@ -151,24 +151,24 @@ const CartPage = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
                     <span>Subtotal</span>
-                    <span>{subtotal.toFixed(3)} KD</span>
+                    <span>{subtotal.toFixed(3)} د.ك</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>Shipping</span>
                     <span>
                       {shippingCost === 0
                         ? "Free"
-                        : `${shippingCost.toFixed(3)} KD`}
+                        : `${shippingCost.toFixed(3)} د.ك`}
                     </span>
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>Tax (5%)</span>
-                    <span>{tax.toFixed(3)} KD</span>
+                    <span>{tax.toFixed(3)} د.ك</span>
                   </div>
                   <div className="border-t pt-4 mt-4">
                     <div className="flex justify-between font-bold text-gray-900 text-lg">
                       <span>Grand Total</span>
-                      <span>{grandTotal.toFixed(3)} KD</span>
+                      <span>{grandTotal.toFixed(3)} د.ك</span>
                     </div>
                   </div>
                 </div>

@@ -1,37 +1,57 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
+const menuLinks = [
+  { path: "/", label: "Home" },
+  { path: "/category/power-tools", label: "Products" },
+  { path: "/contact", label: "Contact" }
+];
+
 const ResponsiveMenu = ({ open, setOpen }) => {
-  const closeMenu = () => {
-    setOpen(false);
-  };
+  const closeMenu = () => setOpen(false);
+
   return (
     <AnimatePresence mode="wait">
       {open && (
-        <motion.div
-          initial={{ opacity: 0, y: -100 }}
-          animate={{ opacity: 1, y: 50 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute top-20 left-0 w-full h-screen z-20"
-        >
-          <div className="text-xl font-semibold uppercase bg-amber-200 text-white py-10 m-6 rounded-3xl">
-            <ul className="flex flex-col justify-center items-center gap-10">
-              <Link to="/" onClick={closeMenu}>
-                Home
-              </Link>
-              <Link to="/category/power-tools" onClick={closeMenu}>
-                Product
-              </Link>{" "}
-              {/* Example Link */}
-              <Link to="/contact" onClick={closeMenu}>
-                Contact us
-              </Link>
-            </ul>
-          </div>
-        </motion.div>
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20"
+            onClick={closeMenu}
+          />
+          
+          {/* Menu */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ type: "spring", damping: 20 }}
+            className="absolute top-16 left-4 right-4 z-30"
+          >
+            <nav className="bg-white shadow-lg rounded-xl overflow-hidden">
+              <ul className="flex flex-col gap-2">
+                {menuLinks.map(({ path, label }) => (
+                  <li key={path}>
+                    <Link
+                      to={path}
+                      onClick={closeMenu}
+                      className="block px-6 py-4 text-lg font-medium text-gray-700
+                               hover:bg-amber-50 hover:text-amber-600 transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
 };
+
 export default ResponsiveMenu;

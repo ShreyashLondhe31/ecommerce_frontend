@@ -66,7 +66,7 @@ const CategoryPage = () => {
                 </p>
                 <div className="flex justify-between items-center mt-auto pt-3">
                   <span className="text-base sm:text-xl font-bold text-amber-600">
-                    {product.price.toFixed(3)} KD
+                    {product.price.toFixed(3)} د.ك
                   </span>
                   <button
                     onClick={() => addItem(product)}

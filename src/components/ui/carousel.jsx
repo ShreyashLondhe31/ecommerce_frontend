@@ -26,8 +26,22 @@ function Carousel({
   children,
   ...props
 }) {
+  const defaultOpts = {
+    align: "center",
+    loop: true,
+    containScroll: "trimSnaps",
+    dragFree: false,
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': {
+        slidesToShow: 1
+      }
+    },
+    ...opts
+  }
+  
   const [carouselRef, api] = useEmblaCarousel({
-    ...opts,
+    ...defaultOpts,
     axis: orientation === "horizontal" ? "x" : "y",
   }, plugins)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
