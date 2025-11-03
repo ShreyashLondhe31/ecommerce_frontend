@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCartStore } from "../../store/cartStore";
 import { CiSearch } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
@@ -10,33 +10,23 @@ import ResponsiveMenu from "./ResponsiveMenu";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // Navbar is fixed to the top — no scroll-based position changes
   const { items } = useCartStore();
-  
+
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Announcement bar height is 48px (top-12 = 3rem = 48px)
-      setIsScrolled(window.scrollY > 48);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // No scroll effect — removed
 
   return (
     <>
-      <nav className={`w-full bg-amber-200 fixed z-40 shadow-sm transition-all duration-300 ${
-        isScrolled ? 'top-0' : 'top-12'
-      }`}>
+      <nav className="w-full bg-amber-200 fixed top-0 z-50 shadow-sm">
         <div className="flex items-center justify-between py-4 px-4 md:px-7">
           {/* Logo */}
           <Link to="/" className="h-12 flex items-center">
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}assets/logo/Logo.png`}
               alt="Logo"
-              className="h-full w-auto object-contain" 
+              className="h-full w-auto object-contain"
             />
           </Link>
 
@@ -44,21 +34,24 @@ const Navbar = () => {
           <div className="hidden md:block">
             <ul className="flex items-center gap-8 font-medium">
               <li>
-                <Link to="/" 
+                <Link
+                  to="/"
                   className="text-amber-900 hover:text-amber-700 transition-colors"
                 >
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/category/power-tools" 
+                <Link
+                  to="/category/power-tools"
                   className="text-amber-900 hover:text-amber-700 transition-colors"
                 >
                   Products
                 </Link>
               </li>
               <li>
-                <Link to="/contact" 
+                <Link
+                  to="/contact"
                   className="text-amber-900 hover:text-amber-700 transition-colors"
                 >
                   Contact
@@ -104,23 +97,28 @@ const Navbar = () => {
                 >
                   <PiShoppingCartThin size={24} className="text-amber-900" />
                   {totalItems > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs
-                                   rounded-full h-5 w-5 flex items-center justify-center">
+                    <span
+                      className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs
+                                   rounded-full h-5 w-5 flex items-center justify-center"
+                    >
                       {totalItems}
                     </span>
                   )}
                 </Link>
 
-                <button className="ml-2 px-4 py-2 bg-amber-100 text-amber-900
+                <Link
+                  to="/login"
+                  className="ml-2 px-4 py-2 bg-amber-100 text-amber-900
                                 font-medium rounded-lg hover:bg-amber-900 hover:text-amber-100 
-                                transition-colors">
+                                transition-colors"
+                >
                   Login
-                </button>
+                </Link>
               </>
             )}
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
@@ -130,7 +128,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      
+
       <ResponsiveMenu open={open} setOpen={setOpen} />
     </>
   );

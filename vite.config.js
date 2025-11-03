@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/ecommerce_frontend/",
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -15,5 +15,5 @@ export default defineConfig({
     allowedHosts: ["preactive-unamatively-zina.ngrok-free.dev"],
   },
   // Explicitly configure public directory
-  publicDir: 'public',
+  publicDir: "public",
 });

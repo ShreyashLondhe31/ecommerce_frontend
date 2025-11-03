@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const menuLinks = [
   { path: "/", label: "Home" },
   { path: "/category/power-tools", label: "Products" },
-  { path: "/contact", label: "Contact" }
+  { path: "/contact", label: "Contact" },
+  { path: "/login", label: "Login" },
 ];
 
 const ResponsiveMenu = ({ open, setOpen }) => {
@@ -19,17 +20,17 @@ const ResponsiveMenu = ({ open, setOpen }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-45"
             onClick={closeMenu}
           />
-          
+
           {/* Menu */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ type: "spring", damping: 20 }}
-            className="absolute top-16 left-4 right-4 z-30"
+            className="fixed top-20 left-4 right-4 z-45"
           >
             <nav className="bg-white shadow-lg rounded-xl overflow-hidden">
               <ul className="flex flex-col gap-2">
