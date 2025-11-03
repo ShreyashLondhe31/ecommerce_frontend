@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCartStore } from "../../store/cartStore";
 import { CiSearch } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
@@ -10,18 +10,32 @@ import ResponsiveMenu from "./ResponsiveMenu";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { items } = useCartStore();
   
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Announcement bar height is 48px (top-12 = 3rem = 48px)
+      setIsScrolled(window.scrollY > 48);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
-      <nav className="w-full bg-amber-200 sticky top-12 z-40 shadow-sm">
+      <nav className={`w-full bg-amber-200 fixed z-40 shadow-sm transition-all duration-300 ${
+        isScrolled ? 'top-0' : 'top-12'
+      }`}>
         <div className="flex items-center justify-between py-4 px-4 md:px-7">
           {/* Logo */}
           <Link to="/" className="h-12 flex items-center">
             <img 
               src={`${import.meta.env.BASE_URL}assets/logo/Logo.png`}
+              alt="Logo"
               className="h-full w-auto object-contain" 
             />
           </Link>

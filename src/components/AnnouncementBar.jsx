@@ -1,7 +1,7 @@
 const AnnouncementBar = () => {
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 bg-amber-300">
+      <div className="top-0 left-0 right-0 z-50 bg-amber-300">
         <div className="relative max-w-screen-2xl mx-auto">
           <div
             className="overflow-hidden whitespace-nowrap py-4"

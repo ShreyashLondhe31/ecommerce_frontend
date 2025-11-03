@@ -3,7 +3,6 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: "/ecommerce_frontend/",
@@ -15,4 +14,6 @@ export default defineConfig({
   server: {
     allowedHosts: ["preactive-unamatively-zina.ngrok-free.dev"],
   },
+  // Explicitly configure public directory
+  publicDir: 'public',
 });
