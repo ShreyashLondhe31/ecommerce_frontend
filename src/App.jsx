@@ -52,27 +52,32 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/category/:categoryName" element={<CategoryPage />} />
           <Route path="/login" element={<LoginPage />} />
-        </Route>
 
-        {/* Admin Routes */}
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<DashboardPage />} />
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="brands" element={<BrandsPage />} />
-        </Route>
+          {/* Redirect unauthorized admin-like paths to 404 */}
+          <Route path="/products" element={<NotFoundPage />} />
+          <Route path="/categories" element={<NotFoundPage />} />
+          <Route path="/brands" element={<NotFoundPage />} />
+          <Route path="/dashboard" element={<NotFoundPage />} />
 
-        {/* 404 Route - with public layout */}
-        <Route element={<PublicLayout />}>
+          {/* 404 catch-all route */}
           <Route path="*" element={<NotFoundPage />} />
+        </Route>
+
+        {/* Admin Routes - all protected under /admin/ path */}
+        <Route path="/admin">
+          <Route path="login" element={<AdminLoginPage />} />
+          <Route
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<DashboardPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="brands" element={<BrandsPage />} />
+          </Route>
         </Route>
       </Routes>
     </div>

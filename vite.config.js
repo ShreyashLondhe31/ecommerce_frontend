@@ -5,14 +5,18 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    host: true,
+    port: 5173,
+    watch: {
+      usePolling: true,
+    },
+  },
   base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-  },
-  server: {
-    allowedHosts: ["preactive-unamatively-zina.ngrok-free.dev"],
   },
   // Explicitly configure public directory
   publicDir: "public",
