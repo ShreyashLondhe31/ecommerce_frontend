@@ -8,9 +8,30 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    /* MODIFICATION: Changed from -100% to -50% */
+    transform: translateX(-50%);
   }
 }
+
+/* --- ✅ START: Added Marquee Animation --- */
+@keyframes scroll-brands {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+.animate-scroll-brands {
+  /* Adjust the duration to make the scroll faster or slower. 
+     Higher number = slower scroll.
+  */
+  animation: scroll-brands 40s linear infinite;
+}
+/* --- ✅ END: Added Marquee Animation --- */
+
 
 .carousel-container {
   max-width: 90%;
@@ -49,6 +70,31 @@
   right: 0;
   bottom: 0;
   background-color: white;
+}
+
+/* Custom Scrollbar Styles */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #f59e0b #fef3c7;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #fef3c7;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: #f59e0b;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
 }
 
 /* Font consistency */
@@ -164,6 +210,13 @@
 }
 
 @layer base {
+  /* --- MODIFICATION HERE --- */
+  html {
+    /* 120% of the browser's default (e.g., 16px -> 19.2px) */
+    /* This scales all rem-based units up by 20% */
+    font-size: 120%;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }

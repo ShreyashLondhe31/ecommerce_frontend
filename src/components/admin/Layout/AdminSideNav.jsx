@@ -17,8 +17,9 @@ const AdminSideNav = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Backdrop - shown when sidebar is open */}
+      {/* Backdrop - now works on all screen sizes */}
       <div
+        // <-- MODIFIED: Removed 'lg:hidden'
         className={`
           fixed inset-0 bg-black/30 backdrop-blur-sm transition-all duration-300
           ${
@@ -31,8 +32,9 @@ const AdminSideNav = ({ isOpen, onClose }) => {
         aria-hidden="true"
       />
 
-      {/* Sidebar */}
+      {/* Sidebar - now always slides */}
       <aside
+        // <-- MODIFIED: Removed 'lg:translate-x-0'
         className={`
           fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-white shadow-lg z-[70]
           transform transition-transform duration-300 ease-in-out
@@ -50,12 +52,8 @@ const AdminSideNav = ({ isOpen, onClose }) => {
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    onClick={() => {
-                      // Only close on mobile
-                      if (window.innerWidth < 1024) {
-                        onClose();
-                      }
-                    }}
+                    // <-- MODIFIED: Always close on click
+                    onClick={onClose}
                     className={`
                       flex items-center gap-3 px-4 py-3 rounded-lg 
                       transition-colors w-full group

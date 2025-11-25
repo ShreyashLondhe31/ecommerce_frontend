@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 const menuLinks = [
   { path: "/", label: "Home" },
-  { path: "/category/power-tools", label: "Products" },
+  { path: "/category", label: "Categories" },
+  { path: "/brands", label: "Brands" },
+  { path: "/blog", label: "Blog" },
   { path: "/contact", label: "Contact" },
   { path: "/login", label: "Login" },
 ];
-
 const ResponsiveMenu = ({ open, setOpen }) => {
   const closeMenu = () => setOpen(false);
 

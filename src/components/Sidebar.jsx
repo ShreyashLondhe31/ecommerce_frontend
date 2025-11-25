@@ -1,20 +1,17 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
-// 1. Import useEffect
 import { useContext, createContext, useState, useEffect } from "react";
+
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children, isDrawerOpen, setIsDrawerOpen }) {
   const [expanded, setExpanded] = useState(false);
 
-  // 2. Add this useEffect hook
   useEffect(() => {
-    // When the drawer is opened from the mobile button
     if (isDrawerOpen) {
-      // Automatically expand the panel
       setExpanded(true);
     }
-  }, [isDrawerOpen]); // This effect runs whenever isDrawerOpen changes
+  }, [isDrawerOpen]);
 
   return (
     <aside
@@ -26,7 +23,7 @@ export default function Sidebar({ children, isDrawerOpen, setIsDrawerOpen }) {
                       : "-translate-x-full md:translate-x-0"
                   }`}
     >
-      <nav className="h-auto inline-flex flex-col bg-white border-r border-t border-b rounded-r-lg shadow-sm">
+      <nav className="h-auto inline-flex flex-col bg-white/80 backdrop-blur-sm border-r border-t border-b rounded-r-lg shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
             src="https://img.logoipsum.com/243.svg"
@@ -35,26 +32,34 @@ export default function Sidebar({ children, isDrawerOpen, setIsDrawerOpen }) {
             }`}
             alt=""
           />
+          {/* MODIFICATION HERE: 
+            - Replaced 'p-1.5' with explicit 'h-9' and 'w-9'
+            - for perfect centering.
+          */}
           <button
             onClick={() => {
               const newExpanded = !expanded;
               setExpanded(newExpanded);
 
-              // 3. This existing logic is still correct:
-              // If the user manually closes the panel,
-              // also close the mobile drawer.
               if (!newExpanded) {
                 setIsDrawerOpen(false);
               }
             }}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="h-9 w-9 rounded-lg bg-gray-50 hover:bg-gray-100 flex items-center justify-center"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
+          <ul
+            className={`
+              flex-1 px-3 overflow-hidden transition-all duration-300
+              ${expanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+            `}
+          >
+            {children}
+          </ul>
         </SidebarContext.Provider>
       </nav>
     </aside>
