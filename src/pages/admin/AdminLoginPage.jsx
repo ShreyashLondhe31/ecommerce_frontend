@@ -26,7 +26,7 @@ const AdminLoginPage = () => {
 
     try {
       // 1. Call your Django Backend
-      const res = await fetch(`${API_BASE_URL}/admin/login/`, {
+      const res = await fetch(`${API_BASE_URL}admin/login/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

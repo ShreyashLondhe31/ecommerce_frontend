@@ -22,7 +22,7 @@ const ProductAttributesForm = ({ productId, onClose, onSaveSuccess }) => {
 
   const fetchProductWithAttributes = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/products/${productId}/`);
+      const response = await fetch(`${API_BASE_URL}products/${productId}/`);
       const data = await response.json();
       
       console.log("Fetched product data:", data);
@@ -144,7 +144,7 @@ const ProductAttributesForm = ({ productId, onClose, onSaveSuccess }) => {
         console.log("- Payload:", payload);
 
         if (attr._isExisting && attr.id) {
-          const url = `${API_BASE_URL}/product-attributes/${attr.id}/`;
+          const url = `${API_BASE_URL}product-attributes/${attr.id}/`;
           console.log(`Updating attribute with PUT to: ${url}`);
           
           const response = await fetch(url, {
@@ -165,7 +165,7 @@ const ProductAttributesForm = ({ productId, onClose, onSaveSuccess }) => {
           console.log("PUT Response data:", responseData);
           return response;
         } else if (!attr._isExisting) {
-          const url = `${API_BASE_URL}/product-attributes/`;
+          const url = `${API_BASE_URL}product-attributes/`;
           console.log("Creating new attribute with POST to:", url);
           
           const response = await fetch(url, {

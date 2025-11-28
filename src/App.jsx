@@ -10,7 +10,7 @@ import CategoryPage from "./pages/CategoryPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage"; 
 import ProductPage from "./pages/ProductPage";
-
+import WhatsAppFloat from "./components/whatsappicon/WhatsAppFloat";
 // Component imports
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
@@ -51,6 +51,9 @@ const PublicLayout = () => {
     <>
       <Navbar />
       <AnnouncementBar />
+
+      <WhatsAppFloat /> {/* ⭐ Add this here */}
+
       <main className="relative">
         <Outlet />
       </main>

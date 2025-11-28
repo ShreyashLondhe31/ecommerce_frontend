@@ -36,7 +36,7 @@ function ProductPage() {
   const addItem = useCartStore((state) => state.addItem);
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}/products/${id}/`)
+    axios.get(`${API_BASE_URL}products/${id}/`)
       .then((res) => {
         setProduct(res.data);
         // Initialize selected attributes with first value of each attribute

@@ -96,7 +96,7 @@ const Navbar = () => {
     const fetchCategories = async () => {
       try {
         setLoadingCategories(true);
-        const response = await fetch(`${API_BASE_URL}/categories`);
+        const response = await fetch(`${API_BASE_URL}categories`);
         if (response.ok) {
           const data = await response.json();
           setCategories(data.filter(cat => cat.is_active));
@@ -114,7 +114,7 @@ const Navbar = () => {
     const fetchBrands = async () => {
       try {
         setLoadingBrands(true);
-        const response = await fetch(`${API_BASE_URL}/brands`);
+        const response = await fetch(`${API_BASE_URL}brands`);
         if (response.ok) {
           const data = await response.json();
           setBrands(data);

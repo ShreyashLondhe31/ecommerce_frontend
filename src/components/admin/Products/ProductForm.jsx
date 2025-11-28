@@ -36,8 +36,8 @@ const ProductForm = ({ productId, onSave, onCancel }) => {
 
   // --- Fetch Categories and Brands ---
   useEffect(() => {
-    fetch(`${API_BASE_URL}/categories/`).then(r => r.json()).then(setCategories).catch(console.error);
-    fetch(`${API_BASE_URL}/brands/`).then(r => r.json()).then(setBrands).catch(console.error);
+    fetch(`${API_BASE_URL}categories/`).then(r => r.json()).then(setCategories).catch(console.error);
+    fetch(`${API_BASE_URL}brands/`).then(r => r.json()).then(setBrands).catch(console.error);
   }, []);
 
   // --- 'useEffect' to READ product data when in Edit Mode ---
@@ -48,7 +48,7 @@ const ProductForm = ({ productId, onSave, onCancel }) => {
     setNewImageSelected(false);
 
     if (isEditMode) {
-      fetch(`${API_BASE_URL}/products/${productId}/`)
+      fetch(`${API_BASE_URL}products/${productId}/`)
         .then(res => {
           if (!res.ok) throw new Error('Failed to fetch product');
           return res.json();
@@ -156,8 +156,8 @@ const ProductForm = ({ productId, onSave, onCancel }) => {
     // --- End of change ---
 
     const url = isEditMode 
-      ? `${API_BASE_URL}/products/${productId}/` 
-      : `${API_BASE_URL}/products/`;
+      ? `${API_BASE_URL}products/${productId}/` 
+      : `${API_BASE_URL}products/`;
       
     const method = isEditMode ? 'PUT' : 'POST';
 
@@ -222,7 +222,7 @@ const ProductForm = ({ productId, onSave, onCancel }) => {
     setSubmitting(true);
     setErr(null);
     try {
-      const resp = await fetch(`${API_BASE_URL}/products/${productId}/`, {
+      const resp = await fetch(`${API_BASE_URL}products/${productId}/`, {
         method: 'DELETE',
       });
       if (!resp.ok) {

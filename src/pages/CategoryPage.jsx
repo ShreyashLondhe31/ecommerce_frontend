@@ -56,8 +56,8 @@ const CategoryPage = () => {
     const fetchData = async () => {
       try {
         const [catRes, prodRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/categories/`),
-          axios.get(`${API_BASE_URL}/products/`),
+          axios.get(`${API_BASE_URL}categories/`),
+          axios.get(`${API_BASE_URL}products/`),
         ]);
         setCategories(catRes.data);
         setProducts(prodRes.data);
