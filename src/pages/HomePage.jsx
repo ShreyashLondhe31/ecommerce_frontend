@@ -111,9 +111,9 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const [catRes, prodRes, brandsRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/categories/`),
-          axios.get(`${API_BASE_URL}/products/?is_best_seller=true`),
-          axios.get(`${API_BASE_URL}/brands/?show_on_homepage=true`),
+          axios.get(`${API_BASE_URL}categories/`),
+          axios.get(`${API_BASE_URL}products/?is_best_seller=true`),
+          axios.get(`${API_BASE_URL}brands/?show_on_homepage=true`),
         ]);
         setCategories(catRes.data);
         setProducts(prodRes.data);

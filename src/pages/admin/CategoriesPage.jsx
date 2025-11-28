@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import CategoryForm from "../../components/admin/Categories/CategoryForm"; 
+// UPDATED: Changed to relative path to match ProductForm fix
+import CategoryForm from "../../components/admin/Categories/CategoryForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,22 +13,18 @@ const CategoriesPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [showPopularOnly, setShowPopularOnly] = useState(false);
-  const [showFilters, setShowFilters] = useState(false);
   
   const scrollContainerRef = useRef(null);
 
   const fetchCategories = () => {
-    // First, always fetch ALL categories to build the complete parent map
-    fetch(`${API_BASE_URL}/categories/?show_all=true`)
+    fetch(`${API_BASE_URL}categories/?show_all=true`)
       .then((res) => res.json())
       .then((allCategories) => {
-        // Build a complete map of all categories (for parent name lookup)
         const categoryMap = allCategories.reduce((acc, cat) => {
           acc[cat.id] = cat.name;
           return acc;
         }, {});
         
-        // Now fetch filtered categories
         const params = new URLSearchParams();
         params.append('show_all', 'true');
         
@@ -43,10 +40,9 @@ const CategoriesPage = () => {
           params.append('is_popular', 'true');
         }
 
-        fetch(`${API_BASE_URL}/categories/?${params.toString()}`)
+        fetch(`${API_BASE_URL}categories/?${params.toString()}`)
           .then((res) => res.json())
           .then((filteredData) => {
-            // Map filtered categories with parent names from the complete map
             const categoriesWithParent = filteredData.map(cat => ({
               ...cat,
               parentName: cat.parent ? categoryMap[cat.parent] || "Unknown" : "---"
@@ -60,7 +56,7 @@ const CategoriesPage = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, [searchQuery, selectedStatus, showPopularOnly]); // Re-fetch when filters change
+  }, [searchQuery, selectedStatus, showPopularOnly]); 
 
   const scrollToTop = () => {
     if (scrollContainerRef.current) {
@@ -97,23 +93,19 @@ const CategoriesPage = () => {
     setShowPopularOnly(false);
   };
 
-  // FIXED: Helper function to get category image source
   const getCategoryImage = (category) => {
     if (!category.image_base64) {
       return "https://via.placeholder.com/60x60?text=No+Image";
     }
     
-    // If it's already a full data URL (starts with data:), return as is
     if (category.image_base64.startsWith('data:')) {
       return category.image_base64;
     }
     
-    // If it's a regular URL (http/https), return as is (backward compatibility)
     if (category.image_base64.startsWith('http')) {
       return category.image_base64;
     }
     
-    // Otherwise, it's base64 data, so add the data URL prefix
     return `data:image/jpeg;base64,${category.image_base64}`;
   };
 
@@ -126,20 +118,6 @@ const CategoriesPage = () => {
         <h1 className="text-2xl font-bold text-gray-800">Categories</h1>
         <div className="flex gap-3">
           <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-            </svg>
-            {showFilters ? "Hide Filters" : "Show Filters"}
-            {hasActiveFilters && (
-              <span className="bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full">
-                Active
-              </span>
-            )}
-          </button>
-          <button
             onClick={showForm ? handleFormCancel : handleAddNew}
             className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
@@ -148,8 +126,8 @@ const CategoriesPage = () => {
         </div>
       </div>
 
-      {/* Filter Panel */}
-      {showFilters && (
+      {/* Filter Panel (Hidden when editing) */}
+      {!showForm && (
         <div className="bg-white shadow px-8 py-6 border-b">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search Input */}
@@ -229,7 +207,6 @@ const CategoriesPage = () => {
 
       {/* List Container */}
       <div className="bg-white shadow">
-        {/* Results Count */}
         <div className="px-8 py-3 bg-gray-50 border-b">
           <p className="text-sm text-gray-600">
             Showing <span className="font-semibold text-gray-900">{categories.length}</span> categor{categories.length !== 1 ? 'ies' : 'y'}

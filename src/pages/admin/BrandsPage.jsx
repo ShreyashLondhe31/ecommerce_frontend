@@ -8,10 +8,9 @@ const BrandsPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingBrandId, setEditingBrandId] = useState(null);
   
-  // --- 1. Filter state ---
+  // --- 1. Filter state (Removed showFilters) ---
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnHomepageFilter, setShowOnHomepageFilter] = useState(""); // "" (Any), "true", "false"
-  const [showFilters, setShowFilters] = useState(false);
   
   const scrollContainerRef = useRef(null);
 
@@ -26,7 +25,7 @@ const BrandsPage = () => {
       params.append('show_on_homepage', showOnHomepageFilter);
     }
 
-    const url = `${API_BASE_URL}/brands/${params.toString() ? '?' + params.toString() : ''}`;
+    const url = `${API_BASE_URL}brands/${params.toString() ? '?' + params.toString() : ''}`;
     
     fetch(url)
       .then((res) => res.json())
@@ -39,7 +38,6 @@ const BrandsPage = () => {
     fetchBrands();
   }, [searchQuery, showOnHomepageFilter]); 
 
-  // --- 4. All functions restored (including scrollToTop) ---
   const scrollToTop = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
@@ -80,17 +78,14 @@ const BrandsPage = () => {
       return "https://via.placeholder.com/60x60?text=No+Logo";
     }
     
-    // If it's already a full data URL (starts with data:), return as is
     if (brand.logo_base64.startsWith('data:')) {
       return brand.logo_base64;
     }
     
-    // If it's a regular URL (http/https), return as is (backward compatibility)
     if (brand.logo_base64.startsWith('http')) {
       return brand.logo_base64;
     }
     
-    // Otherwise, it's base64 data, so add the data URL prefix
     return `data:image/jpeg;base64,${brand.logo_base64}`;
   };
 
@@ -104,18 +99,6 @@ const BrandsPage = () => {
         
         <div className="flex items-center gap-4">
           <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors relative"
-          >
-            {showFilters ? "Hide Filters" : "Show Filters"}
-            {hasActiveFilters && (
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
-              </span>
-            )}
-          </button>
-          <button
             onClick={showForm ? handleFormCancel : handleAddNew}
             className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
           >
@@ -124,59 +107,57 @@ const BrandsPage = () => {
         </div>
       </div>
 
-      {/* --- 5. Search Panel --- */}
-      {showFilters && (
-        <div className="bg-white shadow px-8 py-6 border-b">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-            {/* Search Input */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Search Brands
-              </label>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by brand name or description..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Homepage Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Show on Homepage
-              </label>
-              <select
-                value={showOnHomepageFilter}
-                onChange={(e) => setShowOnHomepageFilter(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white"
-              >
-                <option value="">Any</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-
-            {/* Clear Button */}
-            {hasActiveFilters && (
-              <div className="md:col-span-3">
-                <button
-                  onClick={handleClearFilters}
-                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  Clear All Filters
-                </button>
-              </div>
-            )}
+      {/* --- 5. Search Panel (Permanently Visible) --- */}
+      <div className="bg-white shadow px-8 py-6 border-b">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+          {/* Search Input */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Search Brands
+            </label>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by brand name or description..."
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            />
           </div>
-        </div>
-      )}
 
-      {/* --- 6. Form Container (This is the corrected JSX) --- */}
+          {/* Homepage Filter */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Show on Homepage
+            </label>
+            <select
+              value={showOnHomepageFilter}
+              onChange={(e) => setShowOnHomepageFilter(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white"
+            >
+              <option value="">Any</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+
+          {/* Clear Button */}
+          {hasActiveFilters && (
+            <div className="md:col-span-3">
+              <button
+                onClick={handleClearFilters}
+                className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Clear All Filters
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* --- 6. Form Container --- */}
       {showForm && (
         <div className="bg-white shadow px-8 py-6 border-b">
           <BrandForm
@@ -187,7 +168,7 @@ const BrandsPage = () => {
         </div>
       )}
 
-      {/* --- 7. List Container (Now with Homepage column) --- */}
+      {/* --- 7. List Container --- */}
       <div className="bg-white shadow">
         <div className="px-8 py-3 bg-gray-50 border-b border-gray-200">
           <span className="text-sm font-semibold text-gray-600">
