@@ -21,7 +21,7 @@ const LoginPage = () => {
     setMessage("");
     try {
       // Use the configured API base URL or fallback
-      const res = await axios.post(`${API_BASE_URL}/send-otp/`, { email });
+      const res = await axios.post(`${API_BASE_URL}send-otp/`, { email });
       setMessage(res.data.message);
       setStep(2);
     } catch (error) {
@@ -37,7 +37,7 @@ const LoginPage = () => {
     setLoading(true);
     setMessage("");
     try {
-      const res = await axios.post(`${API_BASE_URL}/verify-otp/`, { email, otp });
+      const res = await axios.post(`${API_BASE_URL}verify-otp/`, { email, otp });
       setMessage(res.data.message);
       console.log("User logged in:", res.data.user);
 

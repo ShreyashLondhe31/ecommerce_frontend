@@ -27,7 +27,7 @@ const CategoryForm = ({ categoryId, onSave, onCancel }) => {
 
   // Fetch all categories
   useEffect(() => {
-    fetch(`${API_BASE_URL}/categories/`)
+    fetch(`${API_BASE_URL}categories/`)
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error("Error fetching categories:", err));
@@ -42,7 +42,7 @@ const CategoryForm = ({ categoryId, onSave, onCancel }) => {
     setNewImageSelected(false);
 
     if (isEditMode) {
-      fetch(`${API_BASE_URL}/categories/${categoryId}/`)
+      fetch(`${API_BASE_URL}categories/${categoryId}/`)
         .then((res) => {
           if (!res.ok) throw new Error("Failed to fetch category");
           return res.json();
@@ -149,8 +149,8 @@ const CategoryForm = ({ categoryId, onSave, onCancel }) => {
     // --- End of change ---
 
     const url = isEditMode
-      ? `${API_BASE_URL}/categories/${categoryId}/`
-      : `${API_BASE_URL}/categories/`;
+      ? `${API_BASE_URL}categories/${categoryId}/`
+      : `${API_BASE_URL}categories/`;
 
     const method = isEditMode ? "PUT" : "POST";
 
@@ -190,7 +190,7 @@ const CategoryForm = ({ categoryId, onSave, onCancel }) => {
     setSubmitting(true);
     setError(null);
     try {
-      const resp = await fetch(`${API_BASE_URL}/categories/${categoryId}/`, {
+      const resp = await fetch(`${API_BASE_URL}categories/${categoryId}/`, {
         method: "DELETE",
       });
       if (!resp.ok) throw new Error("Failed to delete category");

@@ -36,7 +36,7 @@ const DashboardPage = () => {
     const fetchCounts = async () => {
       try {
         // You'll need to update this endpoint
-        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard/counts/`);
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}dashboard/counts/`);
         setCounts(res.data);
       } catch (error) {
         console.error("Error fetching dashboard counts:", error);

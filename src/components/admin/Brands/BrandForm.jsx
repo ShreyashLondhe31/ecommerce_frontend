@@ -46,7 +46,7 @@ const BrandForm = ({ brandId, onSave, onCancel }) => {
     setNewImageSelected(false);
 
     if (isEditMode) {
-      fetch(`${API_BASE_URL}/brands/${brandId}/`)
+      fetch(`${API_BASE_URL}brands/${brandId}/`)
         .then(res => {
           if (!res.ok) throw new Error('Failed to fetch brand');
           return res.json();
@@ -135,8 +135,8 @@ const BrandForm = ({ brandId, onSave, onCancel }) => {
     // --- End of change ---
 
     const url = isEditMode
-      ? `${API_BASE_URL}/brands/${brandId}/`
-      : `${API_BASE_URL}/brands/`;
+      ? `${API_BASE_URL}brands/${brandId}/`
+      : `${API_BASE_URL}brands/`;
     
     const method = isEditMode ? "PUT" : "POST";
 
@@ -176,7 +176,7 @@ const BrandForm = ({ brandId, onSave, onCancel }) => {
     setIsSubmitting(true);
     setError(null);
     try {
-      const resp = await fetch(`${API_BASE_URL}/brands/${brandId}/`, {
+      const resp = await fetch(`${API_BASE_URL}brands/${brandId}/`, {
         method: 'DELETE',
       });
       if (!resp.ok) throw new Error('Failed to delete brand');

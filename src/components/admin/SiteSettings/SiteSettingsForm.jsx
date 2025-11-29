@@ -23,7 +23,7 @@ const SiteSettingsForm = ({ onClose }) => {
     const fetchSettings = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${API_BASE_URL}/site-setting/`);
+        const response = await fetch(`${API_BASE_URL}site-setting/`);
         if (!response.ok) throw new Error('Failed to fetch site settings');
         
         const data = await response.json();
@@ -115,7 +115,7 @@ const SiteSettingsForm = ({ onClose }) => {
         });
       } else {
         // Create new setting
-        response = await fetch(`${API_BASE_URL}/site-setting/`, {
+        response = await fetch(`${API_BASE_URL}site-setting/`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
